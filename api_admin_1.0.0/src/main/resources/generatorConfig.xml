@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="CAR_DATA" targetRuntime="MyBatis3Simple">
+        <commentGenerator>
+            <property name="addRemarkComments" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="org.mariadb.jdbc.Driver"
+                        connectionURL=""
+                        userId=""
+                        password="">
+        </jdbcConnection>
+
+        <javaTypeResolver type="com.atonm.core.mybatis.gen.CustomJavaTypeResolver">
+            <property name="forceBigDecimals" value="false" />
+            <property name="useJSR310Types" value="true" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="model" targetProject="gen">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="xml"  targetProject="gen">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="dao"  targetProject="gen">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="%">
+            <ignoreColumn column=""/>
+        </table>
+    </context>
+</generatorConfiguration>

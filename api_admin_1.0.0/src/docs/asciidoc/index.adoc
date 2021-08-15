@@ -1,0 +1,35 @@
+= API DOCUMENTS
+작성중.
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+== Overview
+
+== HTTP Method
+
+|===
+|Method |설명
+
+|POST
+|리소스를 등록(생성)할때 사용한다.
+
+|PUT
+|리소스를 수정할때 사용한다.
+
+|GET
+|리소스를 조회할때 사용한다.
+
+|DELETE
+|리소스를 삭제할때 사용한다.
+|===
+
+== Resources
+
+=== 공통코드
+include::./resource-code.adoc[]
+=== 차량 정보 조회
+include::./resource-oncar.adoc[]

@@ -1,0 +1,279 @@
+spring:
+  profiles:
+    #active: local
+    active: local
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  #    active: stg
+#    active: prod
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.ejb.interceptor: com.atonm.kblease.api.config.typeHandler.OncarEntityInterceptor
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+  mail:
+    host: 
+    port: 
+    username: 
+    password: 
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  # ----------------------------------------------------------------------------------------------------
+  # redis config
+  # ----------------------------------------------------------------------------------------------------
+  redis:
+    host: 
+    port: 
+    password: 
+    keyprefix: 
+
+server:
+  port: 9090
+servlet:
+  multipart:
+    enabled: true
+    file-size-threshold: 2KB
+    max-file-size: 200MB
+    max-request-size: 215MB
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+
+custom:
+  session-timeout: 60000 #Seesion Time out seconds. 60000 -> 10 hours.
+  allowed-origins:
+    - http://localhost:8210
+  develop : true
+
+---
+spring:
+  profiles: local
+  datasource:
+    hikari:
+      master:
+        driver-class-name: 
+        url: 
+        username: 
+        password: 
+        max-active: 1
+      secondary:
+        driver-class-name: 
+        url: 
+        username: 
+        password: 
+        max-active: 1
+
+
+
+########################################################################################################################
+# 파일경로 지정
+########################################################################################################################
+file:
+  upload-dir: 
+  image-url: 
+  image-backup-dir: 
+  outer-upload-dir: 
+  inner-upload-dir:
+  car-watermark-file-path : 
+  pass-watermark-file-path : 
+  code-dir: 
+
+
+####################################################################################################################
+# 이미지 서버 ftp 정보
+####################################################################################################################
+image-server:
+  url: 
+  username: 
+  password: 
+  path: 
+  port:
+
+external:
+  init:
+    reiniturl87: http://localhost:9090/common-code/reinitSingleTon
+    reiniturl88: ""
+#
+---
+spring:
+  profiles: dev
+  datasource:
+    hikari:
+      master:
+        driver-class-name: 
+        url: 
+        username: 
+        password: 
+        max-active:
+      secondary:
+        driver-class-name: 
+        url: 
+        username: 
+        password: 
+        max-active: 
+
+
+########################################################################################################################
+# 파일경로 지정
+########################################################################################################################
+file:
+  upload-dir: 
+  image-url:
+  image-backup-dir: 
+  outer-upload-dir:
+  inner-upload-dir: 
+  car-watermark-file-path: 
+  pass-watermark-file-path: 
+  code-dir:
+
+####################################################################################################################
+# 이미지 서버 ftp 정보
+####################################################################################################################
+image-server:
+  url: 
+  username:
+  password: 
+  path:
+  port:
+
+
+external:
+  init:
+    reiniturl87: http://58.225.57.11:9320/common-code/reinitSingleTon
+    reiniturl88: ""
+
+# ----------------------------------------------------------------------------------------------------
+# redis config
+# ----------------------------------------------------------------------------------------------------
+redis:
+  host: 
+  port: 
+  type: 
+  password: 
+#
+---
+spring:
+  profiles: staging
+  datasource:
+    hikari:
+      master:
+        driver-class-name: 
+        url: 
+        username: 
+        password: 
+        max-active: 
+      secondary:
+        driver-class-name: 
+        url:
+        username: 
+        password: 
+        max-active: 
+
+
+file:
+  upload-dir: 
+  image-url: 
+  image-backup-dir: 
+  outer-upload-dir: 
+  inner-upload-dir: 
+  car-watermark-file-path: 
+  pass-watermark-file-path: 
+  code-dir: classpath:/gen/
+
+####################################################################################################################
+# 이미지 서버 ftp 정보
+####################################################################################################################
+image-server:
+   url: 
+   username: 
+   password: 
+   path:
+   port:
+
+
+external:
+  init:
+    reiniturl87:
+    reiniturl88: 
+  alimtalk:
+    sendurl: 
+    apreadsendurl:
+
+# ----------------------------------------------------------------------------------------------------
+# redis config
+# ----------------------------------------------------------------------------------------------------
+redis:
+  host: 
+  port: 
+  type: 
+  password: 
+#
+---
+spring:
+  profiles: prod
+  datasource:
+    hikari:
+      master:
+        driver-class-name: 
+        url: 
+        username: 
+        password: 
+        max-active: 1
+      secondary:
+        driver-class-name: 
+        url: 
+        username: 
+        password: 
+        max-active: 1
+
+
+########################################################################################################################
+# 파일경로 지정
+########################################################################################################################
+file:
+  upload-dir: 
+  image-url: 
+  image-backup-dir: 
+  outer-upload-dir: 
+  inner-upload-dir: 
+  car-watermark-file-path: 
+  pass-watermark-file-path: 
+  code-dir: 
+
+####################################################################################################################
+# 이미지 서버 ftp 정보
+####################################################################################################################
+image-server:
+  url: 
+  username:
+  password:
+  path:
+  port:
+
+
+external:
+  init:
+    reiniturl87: http://192.168.16.87:51011/common-code/reinitSingleTon
+    reiniturl88: http://192.168.16.88:51011/common-code/reinitSingleTon
+
+# ----------------------------------------------------------------------------------------------------
+# redis config
+# ----------------------------------------------------------------------------------------------------
+redis:
+  host: 
+  port: 
+  type: 
+  password:
+#

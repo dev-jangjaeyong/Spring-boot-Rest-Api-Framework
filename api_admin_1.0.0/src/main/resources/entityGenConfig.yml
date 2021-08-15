@@ -1,0 +1,13 @@
+jdbcSettings:
+  url: ""
+  username: ""
+  password: ""
+  driverClassName: ""
+packageName: entity
+outputDirectory: 
+tableExclusionRules:
+- tableNames: []
+classAnnotationRules:
+  - annotations:
+      - className: "lombok.Getter"
+      - className: "lombok.Setter"

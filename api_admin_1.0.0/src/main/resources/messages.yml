@@ -1,0 +1,10 @@
+message:
+  not-null: 반드시 값이 있어야합니다.
+  oncar-not-found: 차량 정보가 존재하지 않습니다.
+  cannot-update-has-been-sold: 판매완료 상태의 차량은 수정할 수 없습니다.
+  file-create-fail: 생성 실패
+  file-create-success: 생성 완료
+  server-type-dev: dev
+  server-type-live: live
+  server-type-livesecond: live-second
+  missing-require-value: 필수값 누락입니다.

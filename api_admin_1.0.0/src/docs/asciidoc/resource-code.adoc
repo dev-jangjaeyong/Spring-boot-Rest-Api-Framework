@@ -1,0 +1,78 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+==== 코드 조회 (단건)
+:path: code.selectOne
+[NOTE]
+코드번호(codeNo)와 상위코드번호(upCodeNo) 두 값 중 한 값을 필수로 입력해야 한다. +
+코드번호(codeNo)가 전달되면 해당 코드 단건 정보가 응답 된다.
+
+===== Request parameters details
+include::{snippets}/{path}/request-parameters.adoc[]
+===== Request example
+include::{snippets}/{path}/http-request.adoc[]
+===== Response example
+[source,json,indent=0,role="primary"]
+.Response Body
+include::{snippets}/{path}/response-body.adoc[]
+[source,json,indent=0,role="secondary"]
+.Response
+include::{snippets}/{path}/http-response.adoc[]
+===== Response fields details
+include::{snippets}/{path}/response-fields.adoc[]
+
+==== 코드 조회 (목록)
+:path: code.selectList
+[NOTE]
+코드번호(codeNo)와 상위코드번호(upCodeNo) 두 값 중 한 값을 필수로 입력해야 한다. +
+상위코드번호(upCodeNo)가 전달되면 하위코드 목록 정보가 응답된다.
+
+===== Request parameters details
+include::{snippets}/{path}/request-parameters.adoc[]
+===== Request example
+include::{snippets}/{path}/http-request.adoc[]
+===== Response example
+[source,json,indent=0,role="primary"]
+.Response Body
+include::{snippets}/{path}/response-body.adoc[]
+[source,json,indent=0,role="secondary"]
+.Response
+include::{snippets}/{path}/http-response.adoc[]
+===== Response fields details
+include::{snippets}/{path}/response-fields.adoc[]
+
+==== 코드 등록
+:path: code.registerOne
+===== Request example
+include::{snippets}/{path}/http-request.adoc[]
+===== Request fields details
+include::{snippets}/{path}/request-fields.adoc[]
+===== Response example
+[NOTE]
+등록된 코드 정보가 리턴됩니다.
+[source,json,indent=0,role="primary"]
+.Response Body
+include::{snippets}/{path}/response-body.adoc[]
+[source,json,indent=0,role="secondary"]
+.Response
+include::{snippets}/{path}/http-response.adoc[]
+
+==== 코드 삭제
+:path: code.deleteOne
+===== Request path variable details
+[caption=]
+include::{snippets}/{path}/path-parameters.adoc[]
+===== Request example
+include::{snippets}/{path}/http-request.adoc[]
+
+==== 코드 수정
+:path: code.updateOne
+===== Request fields details
+include::{snippets}/{path}/request-fields.adoc[]
+===== Request example
+[source,json,indent=0,role="primary"]
+.Request Body
+include::{snippets}/{path}/request-body.adoc[]
+[source,json,indent=0,role="secondary"]
+.Request
+include::{snippets}/{path}/http-request.adoc[]

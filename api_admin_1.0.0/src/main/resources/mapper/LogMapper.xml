@@ -1,0 +1,131 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @author jang jae young -->
+<!-- @since 2021-05-08 -->
+<mapper namespace="com.atonm.kblease.api.log.mapper.LogMapper">
+    <insert id="insertActionLog" parameterType="actionLogDTO">
+			INSERT INTO KBLease.dbo.TA_ACTION_LOG
+			(
+				PID
+				,CHANNEL
+				,API_NO
+				,ACTION_URL
+				,ACTION_METHOD
+				,IP
+				,USER_ID
+				,BRWSR_INFO
+				,OS_CLASS
+				,RESULT_CODE
+				,RESULT_STATUS
+				,REQ_ARGS
+				,RES_MSG
+				,REQ_DT
+				,RES_DT
+				,CREATE_DT
+			)
+			VALUES
+			(
+				#{pid},
+				#{channel},
+				<!--(SELECT API_NO FROM BIG.dbo.API WHERE API_URL = #{actionUrl} AND METHOD_NAME = #{actionMethod}),-->
+				NULL,
+				#{actionUrl},
+				#{actionMethod},
+				#{ip},
+		<choose>
+			<when test="userId == null">
+				null,
+			</when>
+			<otherwise>
+				#{userId},
+			</otherwise>
+		</choose>
+				#{brwsrInfo},
+				#{osClass},
+				#{resultCode},
+				#{resultStatus},
+				#{reqArgs},
+				#{resMsg},
+				#{reqDt},
+				#{resDt},
+				GETDATE()
+			)
+    </insert>
+
+	<insert id="insertAccessLog" parameterType="accessLogDTO">
+		INSERT INTO KBLease.dbo.TA_ACCESS_LOG
+			(
+				PID
+				,CHANNEL
+				,MENU_NO
+			 	,ACCESS_URL
+			 	,IP
+			 	,USER_ID
+			 	,BRWSR_INFO
+			 	,OS_CLASS
+			 	,RESULT_CODE
+			 	,RESULT_STATUS
+			 	,REQ_ARGS
+				,CREATE_DT
+			)
+		VALUES
+	   		(
+			   #{pid},
+			   #{channel},
+			   <!-- (SELECT MENU_NO FROM BIG.dbo.MENU WHERE MENU_URL = #{accessUrl} AND PID = #{pid} AND CHNNL_CODE = #{chnnlCode} AND USE_YN = 'Y'),-->
+			   NULL,
+			   #{accessUrl},
+			   #{ip},
+		<choose>
+			<when test="userId == null">
+				null,
+			</when>
+			<otherwise>
+				#{userId},
+			</otherwise>
+		</choose>
+			   #{brwsrInfo},
+			   #{osClass},
+			   #{resultCode},
+			   #{resultStatus},
+			   #{reqArgs},
+			   GETDATE()
+			)
+	</insert>
+
+	<insert id="insertLoginLog" parameterType="actionLogDTO">
+			INSERT INTO KBLease.dbo.TA_LOGIN_HIST
+			(
+				M_ID
+				,USER_ID
+				,PID
+				,CHANNEL
+				,IPADDRESS
+				,USER_AGENT
+				,LOGIN_SUC_YN
+				,LOGIN_DT
+			)
+			VALUES
+			(
+				#{mId},
+				#{userId},
+				#{pid},
+				#{channel},
+				#{ip},
+				#{osClass},
+				#{loginSucYn},
+				GETDATE()
+			)
+    </insert>
+	<insert id="insertLeaseCallLog" statementType="CALLABLE" parameterType="leaseCallLogDTO">
+		{ call KBLease.dbo.USP_KBL_TA_LEASE_CALL_LOG_I(
+				#{carNo},
+				#{carPlateNumber},
+				#{useType},
+				#{connectUserNo},
+				#{ipAddress},
+				#{pid},
+				#{channel}
+			) }
+	</insert>
+</mapper>

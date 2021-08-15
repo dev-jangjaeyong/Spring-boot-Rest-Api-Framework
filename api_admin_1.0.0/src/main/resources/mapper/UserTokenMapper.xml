@@ -1,0 +1,88 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atonm.kblease.api.common.mapper.UserTokenMapper">
+    <!-- refresh token update -->
+    <!--<update id="updateUserTokenInfo" parameterType="userRefreshTokenInfoDTO">
+    	UPDATE KBLease.dbo.TA_MEMBER SET USER_TOKEN = #{refreshToken} WHERE M_ID = #{mId} AND USER_TOKEN IS NULL
+    </update>-->
+
+    <update id="insertUserToken" parameterType="userRefreshTokenInfoDTO">
+    	INSERT INTO KBLease.dbo.TA_MEMBER_TOKEN
+        (
+            M_ID
+            ,S_ID
+            ,M_TOKEN
+            ,CREATE_UID
+            ,CREATE_DT
+            ,UPDATE_UID
+            ,UPDATE_DT
+        )
+        VALUES
+        (
+            #{mId}
+            ,#{sId}
+            ,#{refreshToken}
+            ,#{mId}
+            ,GETDATE()
+            ,#{mId}
+            ,GETDATE()
+        )
+    </update>
+
+    <delete id="deleteUserToken" parameterType="userRefreshTokenInfoDTO">
+        DELETE FROM KBLease.dbo.TA_MEMBER_TOKEN
+        <where>
+            <if test="!@com.atonm.kblease.api.utils.StringUtil@isEmpty(mId)">
+            M_ID = #{mId}
+            </if>
+            AND S_ID = #{sId}
+        </where>
+    </delete>
+
+    <select id="selectUserTokenAll" parameterType="userRefreshTokenInfoDTO" resultType="userRefreshTokenInfoDTO">
+        SELECT M_ID, S_ID, CREATE_DT, UPDATE_DT FROM KBLease.dbo.TA_MEMBER_TOKEN
+        <where>
+            <if test="!@com.atonm.kblease.api.utils.StringUtil@isEmpty(mId)">
+            M_ID = #{mId}
+            </if>
+            AND S_ID = #{sId}
+        </where>
+    </select>
+
+    <select id="selectUserToken" parameterType="userRefreshTokenInfoDTO" resultType="userRefreshTokenInfoDTO">
+        SELECT M_ID, S_ID, M_TOKEN, CREATE_DT, UPDATE_DT FROM KBLease.dbo.TA_MEMBER_TOKEN
+        <where>
+            <if test="!@com.atonm.kblease.api.utils.StringUtil@isEmpty(mId)">
+            M_ID = #{mId}
+            </if>
+            AND S_ID = #{sId}
+        </where>
+    </select>
+
+    <select id="findUserHierarchyRoles" parameterType="userRoleHrcDTO" resultType="userRoleHrcDTO">
+        WITH R_USER_HRC_ROLE AS (
+            SELECT
+                ROLE_ID
+                , ROLE_NAME
+                , 1 AS LV
+            FROM KbLease.dbo.TA_MEMBER_ROLE_HRC WITH(NOLOCK)
+            WHERE P_ROLE_ID IS NULL
+            UNION ALL
+            SELECT
+                a.ROLE_ID
+                , a.ROLE_NAME
+                , b.LV + 1 AS LV
+            FROM KbLease.dbo.TA_MEMBER_ROLE_HRC AS a WITH(NOLOCK)
+                INNER JOIN R_USER_HRC_ROLE AS b ON a.P_ROLE_ID = b.ROLE_ID
+        )
+        SELECT TOP 1
+            STUFF(
+                (SELECT ',' + a.ROLE_NAME
+                    FROM R_USER_HRC_ROLE AS a WITH(NOLOCK)
+                    WHERE a.ROLE_ID >= (SELECT b.ROLE_ID FROM R_USER_HRC_ROLE AS b WITH(NOLOCK) WHERE b.ROLE_NAME = #{roleName})
+                    FOR XML PATH('')), 1,1, ''
+                ) AS ROLE_HIERARCHY
+            FROM R_USER_HRC_ROLE
+    </select>
+</mapper>
