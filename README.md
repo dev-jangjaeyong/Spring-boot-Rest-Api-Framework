@@ -3,6 +3,7 @@
 > spring boot 2.0.5
 > Json Web Token(이하 JWT), spring security, JPA, MyBatis, Redis, lombok
 > 본 소스는 전체를 담고있지 않습니다. 참조용으로만 사용가능합니다.
+> 모든 소스 및 framework 구조는 직접 작성되었습니다.
 
 ## Spring Security와 JWT 연동
   - 로그인 후 spring security에서 session 생성 및 유저 정보관리
